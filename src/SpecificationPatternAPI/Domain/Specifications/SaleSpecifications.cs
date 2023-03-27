@@ -16,9 +16,9 @@ namespace SpecificationPatternAPI.Domain.Specifications
         public static ASpec<Sale> BySystemAdministrator(User user)
         {
             if (user.IsSystemAdministrator)
-                return new Spec<Sale>(s => true);
+                return Spec<Sale>.Any;
 
-            return new Spec<Sale>(s => false);
+            return Spec<Sale>.None;
         }
 
         public static ASpec<Sale> ByCompanyAdministrator(User user)
