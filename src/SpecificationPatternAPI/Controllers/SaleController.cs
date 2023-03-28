@@ -20,7 +20,7 @@ namespace SpecificationPatternAPI.Controllers
             _userService = userService;
         }
 
-        [HttpGet(template: "sales/{userId}")]
+        [HttpGet(template: "{userId}")]
         public async Task<IActionResult> Get(int userId)
         {
             User user = await _userService.Single(UserSpecifications.ByUserId(userId));

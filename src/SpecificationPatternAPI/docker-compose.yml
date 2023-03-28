@@ -1,6 +1,9 @@
-services:
+services:    
+
   sqlserverdb:
     container_name: sqlserver
+    networks:
+      - my-network
     image: mcr.microsoft.com/mssql/server:2019-latest
     ports:
       - 1433:1433
@@ -11,5 +14,20 @@ services:
     volumes: 
       - mssqlvolume:/var/opt/mssql
       
+  webapi:
+    networks:
+        - "my-network"
+    build:
+        context: .
+        dockerfile: Dockerfile
+    ports:
+        - "8080:80"
+    depends_on:
+        - sqlserverdb
+
+networks:
+  my-network:
+    driver: bridge
+
 volumes: 
     mssqlvolume: {}
